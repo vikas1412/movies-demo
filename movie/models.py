@@ -28,3 +28,13 @@ class Director(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}, {self.number}, {self.website}"
 
+
+class Studio(models.Model):
+    title = models.CharField(max_length=500, blank=True, null=True)
+    prefix = models.CharField(max_length=500, blank=True, null=True)
+    website = models.URLField(max_length=500, blank=True, null=True)
+    slug = models.SlugField(max_length=100, blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
