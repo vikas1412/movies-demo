@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from movie.models import Director, Genre, Studio
+from movie.models import Director, Genre, Studio, NewMovie
 
 
 @admin.register(Genre)
@@ -16,3 +16,8 @@ class DirectorInstanceAdmin(admin.ModelAdmin):
 @admin.register(Studio)
 class DirectorInstanceAdmin(admin.ModelAdmin):
     list_display = ('title', 'website', 'timestamp')
+
+
+@admin.register(NewMovie)
+class DirectorInstanceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'director', 'studio', 'release_date', 'genre')
