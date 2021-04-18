@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - TimeBlog{% endblock %}
+
+{% block style %}
+    input{
+    border:1px solid green;
+    padding:1%;
+    padding-left:12px;
+    font-size:17px
+    }
+    .errorlist{
+    color:red;
+    }
+
+    #id_username, #id_password{
+    padding: 12px;
+    margin-bottom: 22px;
+    font-size: 20px;
+    border: 1px solid lightgrey;
+    background-color:white;
+    margin-top: 1%;
+    }
+
+{% endblock %}
+{% block body %}
+
+    <h2 class="text-center vLargeTextField">Add a new Director in MoviesDuo</h2>
+    <hr>
+    <div class="mt-4"></div>
+
+    {% if not user.is_authenticated %}
+        <form method="post" action="#" class="row g-3">
+            {% csrf_token %}
+            <div class="col-md-4">
+                <label for="inputEmail4" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="{{ form.first_name.name }}" id="inputEmail4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Middle Name</label>
+                <input type="text" class="form-control" name="{{ form.middle_name.name }}" id="inputPassword4">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPassword4" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="{{ form.last_name.name }}" id="inputPassword4">
+            </div>
+            <div class="col-6">
+                <label for="inputAddress" class="form-label">Number</label>
+                <input type="number" class="form-control" name="{{ form.number.name }}" id="inputAddress"
+                       placeholder="1234 Main St">
+            </div>
+            <div class="col-6">
+                <label for="inputAddress2" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">Website</label>
+                <input type="url" class="form-control" name="{{ form.website.name }}" id="inputCity">
+            </div>
+
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">Gender</label>
+
+                <select class="form-select">
+                    {% for gen in form.gender %}
+                        <option value="{{ gen|capfirst }}">{{ gen.name|capfirst }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-sm">Add new</button>
+            </div>
+
+        </form>
+    {% else %}
+        <p>You are already logged in to your account. If you want to logout of current account, please <a
+                href="{% url 'logout' %}">logout here</a>.</p>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

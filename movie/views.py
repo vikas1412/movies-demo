@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from movie.forms import SignupForm
+from django.views import generic
+
+from movie.models import Director
 
 
 def index(request):
@@ -28,3 +31,7 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
+class DirectorCreate(generic.CreateView):
+    model = Director
+    template_name = 'movie/new-director.html'
+    fields = "__all__"
