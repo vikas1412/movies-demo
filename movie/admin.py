@@ -14,10 +14,10 @@ class DirectorInstanceAdmin(admin.ModelAdmin):
 
 
 @admin.register(Studio)
-class DirectorInstanceAdmin(admin.ModelAdmin):
+class StudioInstanceAdmin(admin.ModelAdmin):
     list_display = ('title', 'website', 'timestamp')
 
 
 @admin.register(NewMovie)
-class DirectorInstanceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'director', 'studio', 'release_date', 'genre')
+class NewMovieInstanceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'studio', 'release_date')
