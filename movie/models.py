@@ -25,9 +25,9 @@ class Genre(models.Model):
 
 class Director(models.Model):
     GENDER = (
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('others', 'Others'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('Others', 'Others'),
     )
     first_name = models.CharField(max_length=200, blank=True, null=True)
     middle_name = models.CharField(max_length=200, blank=True, null=True)
