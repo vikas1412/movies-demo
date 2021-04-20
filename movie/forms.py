@@ -3,7 +3,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from movie.models import Director, NewMovie
+from movie.models import Director, NewMovie, Studio
+
+
+class StudioForm(forms.ModelForm):
+    class Meta:
+        model = Studio
+        fields = ('title', 'prefix', 'website')
+
+    def clean(self):
+        cleaned_data = super(StudioForm, self).clean()
+        if len(str(cleaned_data['title'])) < 6:
+            raise ValidationError(_("A proper well recognised Studio name is required."))
+        return cleaned_data
 
 
 class MovieForm(forms.ModelForm):
