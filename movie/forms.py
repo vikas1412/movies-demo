@@ -16,7 +16,7 @@ class MovieForm(forms.ModelForm):
         title = cleaned_data['title']
         image = cleaned_data['image']
 
-        if len(title) < 5:
+        if len(str(title)) < 5:
             raise ValidationError(_("Please enter a Proper title for the movie."))
         if image is None:
             raise ValidationError(_("Please select a cover image for the movie."))
