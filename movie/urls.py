@@ -21,4 +21,10 @@ urlpatterns = [
 
     path("movie/<int:pk>/", views.MovieDetail.as_view(), name="movie"),
 
+    path("new/studio/", views.new_studio, name="new-studio"),
+
+    path("studio/<int:pk>/", views.StudioDetail.as_view(), name="studio"),
+
+    path("studios/", views.StudioList.as_view(), name="studios"),
+
 ]
