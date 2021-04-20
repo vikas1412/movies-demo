@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}All movies{% endblock %}
+
+{% block body %}
+    <div class="row mt-3">
+
+        <div class="col-sm-12 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center card-title">
+                        {% if movie.image %}
+                            <img src="{{ movie.image.url }}" style="width:60px; height:60px; object-fit:cover">
+                        {% endif %}
+                        {{ movie.title }}</h2>
+                    <hr>
+                    <span style="float: right; color: darkgrey; font-size: 17px">{{ movie.timestamp }}</span>
+                    <br>
+
+                    {% if movie.image %}
+                        <img class="mt-3" src="{{ movie.image.url }}"
+                             style="width:100%; height:400px; object-fit:cover">
+                    {% else %}
+                        <p style="color: grey">No image associated with this Movie uploaded! <i>Happy moving.</i></p>
+                    {% endif %}
+
+                    <p class="mt-3"><strong>Decription:</strong><br>{{ movie.review|linebreaks }}</p>
+                    <p class="mt-3"><strong>Director(s) info:</strong><br></p>
+
+
+                    {% for director in movie.director.all %}
+                        <div class="container border p-1 text-center">
+                            <strong>Name: </strong>
+                            <p>{{ director.first_name }} {{ director.middle_name }} {{ director.last_name }}</p>
+                            <strong>Contact Info: </strong>
+                            <p>{{ director.number }}, {{ director.website }}</p>
+
+                            {% if director.dob %}
+                                <strong>Date of Birth & Gender: </strong>
+                                <p>{{ director.dob }} - {{ director.gender|capfirst }}</p>
+                            {% else %}
+                                <strong>Date of Birth & Gender: </strong><p>Not Updated.</p>
+                            {% endif %}
+
+                        </div>
+                    {% endfor %}
+
+                    <p class="mt-3"><strong>Genre(s) type:</strong><br></p>
+                    <div class="container border p-1">
+                        {% for genre in movie.genre.all %}
+                            <span class="badge bg-primary">{{ genre }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <p class="mt-3"><strong>ASIN Unique number:</strong></p>
+                    <p>{{ movie.asin }}</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
