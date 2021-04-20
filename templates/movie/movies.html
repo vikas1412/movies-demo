@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}All movies{% endblock %}
+
+{% block body %}
+    <div class="row text-center mt-3">
+    {% for movie in movies %}
+        <div class="col-sm-12 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'movie' movie.id %}"><h5 class="card-title">{{ movie.title }}</h5></a>
+                    <p>{{ movie.review|truncatechars:'200' }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
