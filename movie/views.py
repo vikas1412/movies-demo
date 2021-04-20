@@ -56,3 +56,9 @@ class MoviesList(generic.ListView):
     model = NewMovie
     template_name = 'movie/movies.html'
     context_object_name = "movies"
+
+
+class MovieDetail(generic.DetailView):
+    model = NewMovie
+    template_name = "movie/movie.html"
+    context_object_name = "movie"

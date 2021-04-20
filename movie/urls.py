@@ -15,5 +15,6 @@ urlpatterns = [
 
     path("all/", views.MoviesList.as_view(), name="movies"),
 
+    path("movie/<int:pk>/", views.MovieDetail.as_view(), name="movie"),
 
 ]
