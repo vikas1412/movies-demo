@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row text-center mt-3">
-        <div class="col-sm-6 p-0">
+        <div class="col-sm-4 p-0">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Browse genres</h5>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 p-0">
+        <div class="col-sm-4 p-0">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Add new Director</h5>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 p-0">
+        <div class="col-sm-4 p-0">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Add new genre</h5>
@@ -28,11 +28,38 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 p-0">
+        <div class="col-sm-4 p-0">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Add new movie</h5>
                     <a href="{% url 'new-movie' %}" class="btn-sm btn btn-primary">Add movie</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Browse Movies</h5>
+                    <a href="{% url 'movies' %}" class="btn-sm btn btn-primary">Check out</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add new Studio</h5>
+                    <a href="{% url 'new-studio' %}" class="btn-sm btn btn-primary">Add Studio</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Browse Studios</h5>
+                    <a href="{% url 'studios' %}" class="btn-sm btn btn-primary">Check all</a>
                 </div>
             </div>
         </div>
