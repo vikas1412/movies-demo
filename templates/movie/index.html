@@ -3,5 +3,38 @@
 {% block title %}MoviesOppo{% endblock %}
 
 {% block body %}
-<h1>Helloo</h1>
+    <div class="row text-center mt-3">
+        <div class="col-sm-6 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add a director</h5>
+                    <a href="#" class="btn-sm btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <a href="{% url 'new-director' %}" class="btn-sm btn btn-primary">New director</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add new genre</h5>
+                    <a href="{% url 'new-genre' %}" class="btn-sm btn btn-primary">New genre</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add new movie</h5>
+                    <a href="{% url 'new-movie' %}" class="btn-sm btn btn-primary">Add movie</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
