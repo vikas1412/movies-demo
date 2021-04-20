@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 
 class Genre(models.Model):
@@ -9,6 +11,16 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.title
+
+    def clean(self):
+        genres = ['Action', 'Animation', 'Comedy', 'Crime', 'Drama', 'Experimental', 'Fantasy', 'Historical', 'Horror',
+                  'Romance', 'Science Fiction', 'Thriller', 'Western', 'Other', ]
+        errors = {}
+        title = self.title
+        if title not in genres:
+            errors['title'] = _(f"Must be one of genre from {genres}")
+        if errors:
+            raise ValidationError(errors)
 
 
 class Director(models.Model):
@@ -41,6 +53,10 @@ class Studio(models.Model):
         return self.title
 
 
+def new_movie_save(instance, filename):
+    return 'movies/{0}/{1}'.format(instance.title, filename)
+
+
 class NewMovie(models.Model):
     title = models.CharField(max_length=500, blank=True, null=True)
     prefix = models.CharField(max_length=500, blank=True, null=True)
@@ -49,13 +65,15 @@ class NewMovie(models.Model):
     director = models.ManyToManyField(Director, blank=True)
     studio = models.ForeignKey('Studio', on_delete=models.SET_NULL, null=True)
     release_date = models.DateField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(upload_to=new_movie_save, null=True, blank=True)
     review = models.TextField()
     genre = models.ManyToManyField(Genre, blank=True)
+    asin = models.CharField(max_length=200, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.title} by {self.director} released on {self.release_date}"
+        # return f"{self.title} by {self.director.first_name} released on {self.release_date}"
+        return self.title
 
     # def display_genre(self):
     #     return ', '.join(genre.title for genre in self.genre.all()[:3])
