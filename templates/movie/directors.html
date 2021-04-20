@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}All directors{% endblock %}
+
+{% block body %}
+    <h2>List of all Directors in MoviesMew app</h2>
+    <div class="row text-center mt-5">
+    {% for director in directors %}
+        <div class="col-sm-12 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'director' director.id %}"><h6 class="card-title">{{ director.first_name }} {{ director.middle_name }} {{ director.last_name }}</h6></a>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
