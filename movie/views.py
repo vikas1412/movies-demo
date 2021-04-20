@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from movie.forms import SignupForm
 from django.views import generic
 
-from movie.models import Director, Genre
+from movie.models import Director, Genre, NewMovie
 
 
 def index(request):
@@ -35,6 +35,7 @@ class DirectorCreate(generic.CreateView):
     model = Director
     template_name = 'movie/new-director.html'
     fields = "__all__"
+    success_url = "/"
 
 
 class GenreCreate(generic.CreateView):
@@ -42,3 +43,16 @@ class GenreCreate(generic.CreateView):
     template_name = 'movie/new-genre.html'
     fields = ("title",)
     success_url = '/'
+
+
+class NewMovieCreate(generic.CreateView):
+    model = NewMovie
+    template_name = 'movie/new-movie.html'
+    fields = "__all__"
+    success_url = "/"
+
+
+class MoviesList(generic.ListView):
+    model = NewMovie
+    template_name = 'movie/movies.html'
+    context_object_name = "movies"
