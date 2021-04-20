@@ -4,15 +4,25 @@
 
 {% block body %}
     <div class="row text-center mt-3">
-    {% for movie in movies %}
-        <div class="col-sm-12 p-0">
-            <div class="card">
-                <div class="card-body">
-                    <a href="{% url 'movie' movie.id %}"><h5 class="card-title">{{ movie.title }}</h5></a>
-                    <p>{{ movie.review|truncatechars:'200' }}</p>
+        {% for movie in movies %}
+            <div class="col-sm-12 p-0">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'movie' movie.id %}"><h5 class="card-title">{{ movie.title }}</h5></a>
+
+                            {% if movie.image %}
+                                <img src="{{ movie.image.url }}" style="width: 80px; height: 80px; object-fit: cover">
+                            {% else %}
+
+                                <img src="https://cdn.pixabay.com/photo/2021/01/15/17/01/green-5919790__480.jpg"
+                                     style="width: 80px; height: 80px; object-fit: cover">
+                            {% endif %}
+                        </div>
+                        <p>{{ movie.review|truncatechars:'200' }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 {% endblock %}
