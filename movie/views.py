@@ -6,10 +6,10 @@ from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from movie.forms import SignupForm, DirectorForm, MovieForm
+from movie.forms import SignupForm, DirectorForm, MovieForm, StudioForm
 from django.views import generic
 
-from movie.models import Director, Genre, NewMovie
+from movie.models import Director, Genre, NewMovie, Studio
 
 
 def index(request):
@@ -38,6 +38,8 @@ class GenreCreate(generic.CreateView):
     success_url = '/'
 
 
+@transaction.atomic
+@login_required
 def new_movie(request):
     form = MovieForm(request.POST, request.FILES or None)
 
@@ -96,3 +98,32 @@ class DirectorDetail(generic.DetailView):
     model = Director
     template_name = "movie/director.html"
     context_object_name = "director"
+
+
+@transaction.atomic
+@login_required
+def new_studio(request):
+    form = StudioForm(request.POST or None)
+
+    if form.is_valid():
+        form_obj = form.save(commit=False)
+        # slug = form_obj.cleaned_data['title']
+        form.save()
+        return redirect('studio', form_obj.id)
+
+    params = {
+        'form': form,
+    }
+    return render(request, 'movie/new-studio.html', params)
+
+
+class StudioList(generic.ListView):
+    model = Studio
+    template_name = 'movie/studios.html'
+    context_object_name = 'studios'
+
+
+class StudioDetail(generic.DetailView):
+    model = Studio
+    template_name = 'movie/studio.html'
+    context_object_name = 'studio'
