@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}All Studios{% endblock %}
+
+{% block body %}
+    <h2>List of all Studios in MoviesMew app</h2>
+    <div class="row text-center mt-5">
+        {% if studios %}
+            {% for studio in studios %}
+                <div class="col-sm-12 p-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{% url 'studio' studio.id %}"><h6
+                                    class="card-title">{{ studio.title }}</h6>
+                            </a>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h4>No Studios added.</h4>
+        {% endif %}
+    </div>
+{% endblock %}
