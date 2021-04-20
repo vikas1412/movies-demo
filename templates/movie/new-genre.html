@@ -28,18 +28,20 @@
     <h2 class="text-center vLargeTextField">Add a new Genre type in MoviesDuo</h2>
     <hr>
     <div class="mt-4"></div>
-        <form method="post" action="#" class="row g-3">
-            {% csrf_token %}
-            <div class="col-md-4">
-                <label for="inputEmail4" class="form-label">Genre</label>
-                <input type="text" class="form-control" name="{{ form.title.name }}" id="inputEmail4">
-            </div>
+    <label for="inputEmail4" style="color: red" class="form-label">{{ form.errors.title }}</label>
 
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-sm">Save</button>
-            </div>
+    <form method="post" action="#" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-4">
+            <label for="inputEmail4" class="form-label">Genre</label>
+            <input type="text" class="form-control" name="{{ form.title.name }}" id="inputEmail4">
+        </div>
 
-        </form>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </div>
+
+    </form>
     <br>
     <br>
     <br>
