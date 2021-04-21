@@ -6,6 +6,7 @@ from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from movie.filters import MoviesFilter
 from movie.forms import SignupForm, DirectorForm, MovieForm, StudioForm
 from django.views import generic
 
@@ -127,3 +128,9 @@ class StudioDetail(generic.DetailView):
     model = Studio
     template_name = 'movie/studio.html'
     context_object_name = 'studio'
+
+
+class GenreList(generic.ListView):
+    model = Genre
+    template_name = "movie/genres.html"
+    context_object_name = "genres"

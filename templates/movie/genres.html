@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}All directors{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+    <h2>List of all Genres in MoviesMew app</h2>
+    <a href="{% url 'new-genre' %}" style="color: orange">Add new</a>
+    </div>
+    <div class="row text-center mt-5">
+        {% if genres %}
+            {% for genre in genres %}
+                <div class="col-sm-12 p-0">
+                    <div class="card">
+                        <a href="#"><h6
+                                class="card-title">{{ genre.title }}</h6>
+                        </a>
+                        <p></p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h4>No Genre added.</h4>
+        {% endif %}
+    </div>
+{% endblock %}
