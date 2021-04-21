@@ -6,7 +6,6 @@ from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from movie.filters import MoviesFilter
 from movie.forms import SignupForm, DirectorForm, MovieForm, StudioForm
 from django.views import generic
 
