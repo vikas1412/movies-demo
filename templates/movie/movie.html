@@ -2,62 +2,87 @@
 
 {% block title %}All movies{% endblock %}
 
+{% block style %}
+    .centered {
+    position: absolute;
+    top: 78%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    width:100%;
+    color: white;
+
+    }
+
+{% endblock %}
+
 {% block body %}
     <div class="row mt-3">
 
         <div class="col-sm-12 p-0">
             <div class="card">
-                <div class="card-body">
-                    <h2 class="text-center card-title">
-                        {% if movie.image %}
-                            <img src="{{ movie.image.url }}" style="width:60px; height:60px; object-fit:cover">
-                        {% endif %}
-                        {{ movie.title }}</h2>
-                    <hr>
-                    <span style="float: right; color: darkgrey; font-size: 17px">{{ movie.timestamp }}</span>
-                    <br>
-
-                    {% if movie.image %}
-                        <img class="mt-3" src="{{ movie.image.url }}"
-                             style="width:100%; height:400px; object-fit:cover">
-                    {% else %}
-                        <p style="color: grey">No image associated with this Movie uploaded! <i>Happy moving.</i></p>
-                    {% endif %}
-
-                    <p class="mt-3"><strong>Decription:</strong><br>{{ movie.review|linebreaks }}</p>
-                    <p class="mt-3"><strong>Director(s) info:</strong><br></p>
-
-
-                    {% for director in movie.director.all %}
-                        <div class="container border p-1 text-center">
-                            <strong>Name: </strong>
-                            <p>{{ director.first_name }} {{ director.middle_name }} {{ director.last_name }}</p>
-                            <strong>Contact Info: </strong>
-                            <p>{{ director.number }}, {{ director.website }}</p>
-
-                            {% if director.dob %}
-                                <strong>Date of Birth & Gender: </strong>
-                                <p>{{ director.dob }} - {{ director.gender|capfirst }}</p>
+                <div class="card-body p-0">
+                    <div class="col-sm-12 pt-0">
+                        <div class="card">
+                            {% if movie.image %}
+                                <img class="border card-img-tp" src="{{ movie.image.url }}"
+                                     style="width: 100%; height: 450px; object-fit: cover">
                             {% else %}
-                                <strong>Date of Birth & Gender: </strong><p>Not Updated.</p>
+
+                                <img class="border card-img-tp"
+                                     src="https://cdn.pixabay.com/photo/2021/01/15/17/01/green-5919790__480.jpg"
+                                     style="width: 100%; height: 450px; object-fit: cover">
                             {% endif %}
 
-                        </div>
-                    {% endfor %}
+                            <div class="card-body p-2 text-center centered">
+                                <h2><a href="{% url 'movie' movie.id %}" style="color: orangered"
+                                       class=" card-title">{{ movie.title }}</a></h2>
+                            </div>
 
-                    <p class="mt-3"><strong>Genre(s) type:</strong><br></p>
-                    <div class="container border p-1">
-                        {% for genre in movie.genre.all %}
-                            <span class="badge bg-primary">{{ genre }}</span>
-                        {% endfor %}
+
+                        </div>
                     </div>
 
-                    <p class="mt-3"><strong>ASIN Unique number:</strong></p>
-                    <p>{{ movie.asin }}</p>
+                    <div class="d-flex p-2 justify-content-between">
+                        {% if movie.image %}
+                            <img src="{{ movie.image.url }}"
+                                 style="width:70px; height:90px; object-fit:cover; margin: 2%">
+                        {% endif %}
+                        <div>
+                            <h4 style="font-weight: 900; color: red">Genre(s)</h4>
+                            {% for genre in movie.genre.all %}
+                                <span class="badge" style="background-color: orangered">{{ genre }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr>
 
+                    <div class="card-body">
+                        <p style="color: lightcoral">{{ movie.review }}</p>
+                        <h2 style="font-weight: 900; color: red">Directors</h2>
+                        {% for director in movie.director.all %}
+                            <a href="{% url 'director' director.id %}" class="badge"
+                               style="padding: 12px; border-radius: 32px; background-color: lightcoral;">{{ director.first_name }} {{ director.first_name }}</a>
+                        {% endfor %}
+
+                        <div>
+                            <h2 class="mt-5" style="font-weight: 900; color: red">Studio</h2>
+
+                            <a href="{% url 'studio' movie.studio.id %}" class="badge"
+                               style="padding: 12px; border-radius: 32px; background-color: lightcoral;">{{ movie.studio }}</a>
+
+                            <div class="mt-3 container">
+
+
+                                <h5 style="color: coral;">Release Date: {{ movie.timestamp|date:"N j, o" }}</h5>
+                                <h5 style="color: coral;">Amazon ASIN: {{ movie.asin }}</h5>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 {% endblock %}
