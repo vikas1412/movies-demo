@@ -48,6 +48,7 @@ def new_movie(request):
         form_obj.image = request.FILES['image']
         form_obj.release_date = datetime.today()
         form_obj.save()
+        form.save_m2m()
         return redirect('movie', form_obj.id)
 
     params = {
