@@ -41,7 +41,10 @@ class GenreCreate(generic.CreateView):
 @transaction.atomic
 @login_required
 def new_movie(request):
-    form = MovieForm(request.POST, request.FILES or None)
+    if request.POST:
+        form = MovieForm(request.POST, request.FILES or None)
+    else:
+        form = MovieForm()
 
     if form.is_valid():
         form_obj = form.save(commit=False)
